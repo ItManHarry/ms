@@ -8,4 +8,7 @@
   <artifactId>ms_movie</artifactId>
   <name>movie</name>
   <description>Movie Tickets Sale</description>
+  <build>
+  	<finalName>ms-movie</finalName>
+  </build>
 </project>

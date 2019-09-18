@@ -5,17 +5,14 @@
     <artifactId>dooms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>ms_movie</artifactId>
-  <name>movie</name>
-  <description>Movie Tickets Sale</description>
-  <dependencies>  	
-	<!-- 导入Eureka客户端 -->
-	<dependency>
+  <artifactId>eureka-server</artifactId>
+  <name>Eureka</name>
+  <description>Eureka Server</description>
+  <!-- Eureka服务端 -->
+  <dependencies>
+  	<dependency>
   		<groupId>org.springframework.cloud</groupId>
-  		<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+  		<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
   	</dependency>
   </dependencies>
-  <build>
-  	<finalName>ms-movie</finalName>
-  </build>
 </project>

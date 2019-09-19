@@ -5,10 +5,10 @@
     <artifactId>dooms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>eureka-server</artifactId>
-  <name>Eureka</name>
-  <description>Eureka Server</description>
-  <!-- Eureka服务端 -->
+  <artifactId>eureka-server-2nd</artifactId>
+  <name>EurekaServerSecond</name>
+  <description>Eureka Server Second</description>
+   <!-- Eureka服务端 -->
   <dependencies>
   	<dependency>
   		<groupId>org.springframework.cloud</groupId>
@@ -16,6 +16,6 @@
   	</dependency>
   </dependencies>
   <build>
-  	<finalName>eureka-server-1</finalName>
+  	<finalName>eureka-server-2</finalName>
   </build>
 </project>

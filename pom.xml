@@ -97,5 +97,6 @@
 		<module>ms_user</module>
 		<module>ms_movie</module>
 		<module>eureka-server</module>
+		<module>eureka-server-2nd</module>
 	</modules>
 </project>

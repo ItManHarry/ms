@@ -1,10 +1,12 @@
 package com.doosan.ms.movie.controller;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
 import com.doosan.ms.movie.pojo.User;
 @RequestMapping("/movie")
 @RestController
@@ -12,7 +14,12 @@ public class MovieController {
 	
 	@Autowired	
 	private RestTemplate restTemplate;
-
+	@Autowired
+	private DiscoveryClient discoveryClient;
+	/**
+	 * restTemplate way
+	 * @return
+	 */
 	@PostMapping("/order")
 	public String order() {
 		//模拟当前用户
@@ -23,6 +30,24 @@ public class MovieController {
 		//调用用户微服，获取用户具体信息
 		System.out.println(user.getName() + " is buying the movie tickets...");
 		
+		return "Sale successfully";
+	}
+	
+	/**
+	 * Eureka way
+	 * @return
+	 */
+	@PostMapping("/sale")
+	public String sale() {
+		//模拟当前用户
+		Integer id = 1;
+		//获取Eureka中的用户微服务 - 根据名称获取
+		List<ServiceInstance> instances = discoveryClient.getInstances("microservice-user");
+		//如果没有负载均衡，只能获取一个服务器
+		ServiceInstance instance = instances.get(0);
+		User user = restTemplate.getForObject("http://"+instance.getHost()+":"+instance.getPort()+"/user/find/"+id, User.class);
+		//调用用户微服，获取用户具体信息
+		System.out.println(user.getName() + " is buying the movie tickets...(Use eureka to get the serivce infomation)");
 		return "Sale successfully";
 	}
 }

@@ -3,6 +3,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +48,27 @@ public class MovieController {
 		//如果没有负载均衡，只能获取一个服务器
 		ServiceInstance instance = instances.get(0);
 		User user = restTemplate.getForObject("http://"+instance.getHost()+":"+instance.getPort()+"/user/find/"+id, User.class);
+		//调用用户微服，获取用户具体信息
+		System.out.println(user.getName() + " is buying the movie tickets...(Use eureka to get the serivce infomation)");
+		return "Sale successfully";
+	}
+	
+	/**
+	 * Eureka way-使用Ribbon负载均衡
+	 * @return
+	 */
+	//注入负载均衡客户端
+	@Autowired
+	private LoadBalancerClient loadBalancerClient;
+	@PostMapping("/buy")
+	public String buy() {
+		//模拟当前用户
+		Integer id = 1;
+		//使用Ribbon选择合适的服务实例
+//		ServiceInstance instance = loadBalancerClient.choose("microservice-user");
+//		User user = restTemplate.getForObject("http://"+instance.getHost()+":"+instance.getPort()+"/user/find/"+id, User.class);
+		//使用简化版(地址栏直接使用微服名称)-前提是启动类在RrestTemplate初始化的时候增加@LoadBalanced注解
+		User user = restTemplate.getForObject("http://microservice-user/user/find/"+id, User.class);
 		//调用用户微服，获取用户具体信息
 		System.out.println(user.getName() + " is buying the movie tickets...(Use eureka to get the serivce infomation)");
 		return "Sale successfully";

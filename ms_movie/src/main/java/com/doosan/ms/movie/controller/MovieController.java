@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
 import com.doosan.ms.movie.ofs.UserServiceInf;
 import com.doosan.ms.movie.pojo.User;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @RequestMapping("/movie")
 @RestController
 public class MovieController {
@@ -63,6 +63,7 @@ public class MovieController {
 	@Autowired
 	private LoadBalancerClient loadBalancerClient;
 	@PostMapping("/buy")
+	@HystrixCommand(fallbackMethod =  "fallback")
 	public String buy() {
 		//模拟当前用户
 		Integer id = 1;
@@ -75,6 +76,14 @@ public class MovieController {
 		System.out.println(user.getName() + " is buying the movie tickets...(Use eureka to get the serivce infomation)");
 		return "Sale successfully";
 	}
+	
+	/**
+	 * 熔断器回滚方法
+	 */
+	public String fallback() {
+		return "Service can not be used!";
+	}
+	
 	@Autowired
 	private UserServiceInf usi;
 	@PostMapping("/get")

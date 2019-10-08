@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.doosan.ms.movie.ofs.UserServiceInf;
 import com.doosan.ms.movie.pojo.User;
 @RequestMapping("/movie")
 @RestController
@@ -73,4 +75,15 @@ public class MovieController {
 		System.out.println(user.getName() + " is buying the movie tickets...(Use eureka to get the serivce infomation)");
 		return "Sale successfully";
 	}
+	@Autowired
+	private UserServiceInf usi;
+	@PostMapping("/get")
+	public String getTicket() {
+		Integer id = 1;
+		User user = usi.getUserById(id);
+		//调用用户微服，获取用户具体信息
+		System.out.println(user.getName() + " is buying the movie tickets...(Use OpenFeign to get the serivce infomation)");
+		return "Get ticket successfully";
+	}
+	
 }

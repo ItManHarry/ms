@@ -14,6 +14,11 @@
   		<groupId>org.springframework.cloud</groupId>
   		<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
   	</dependency>
+  	<!-- 导入OpenFeign -->
+  	<dependency>
+  		<groupId>org.springframework.cloud</groupId>
+  		<artifactId>spring-cloud-starter-openfeign</artifactId>
+  	</dependency>
   </dependencies>
   <build>
   	<finalName>ms-movie</finalName>

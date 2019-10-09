@@ -2,6 +2,7 @@ package com.doosan.ms.movie.ofs;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import com.doosan.ms.movie.ofs.hystrix.UserServiceFallback;
 import com.doosan.ms.movie.pojo.User;
 /**
  * 注意事项
@@ -11,7 +12,7 @@ import com.doosan.ms.movie.pojo.User;
  * @author 20112004
  *
  */
-@FeignClient("microservice-user")
+@FeignClient(value = "microservice-user", fallback = UserServiceFallback.class)
 public interface UserServiceInf {
 	
 	@GetMapping("/user/find/{id}")

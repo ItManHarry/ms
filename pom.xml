@@ -98,5 +98,6 @@
 		<module>ms_movie</module>
 		<module>eureka-server</module>
 		<module>eureka-server-2nd</module>
+		<module>hystrix-server</module>
 	</modules>
 </project>

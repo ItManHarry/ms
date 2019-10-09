@@ -90,6 +90,8 @@ public class MovieController {
 	public String getTicket() {
 		Integer id = 1;
 		User user = usi.getUserById(id);
+		if(user == null)
+			return "Feign Hystrix Executed...";
 		//调用用户微服，获取用户具体信息
 		System.out.println(user.getName() + " is buying the movie tickets...(Use OpenFeign to get the serivce infomation)");
 		return "Get ticket successfully";

@@ -18,7 +18,8 @@ public class AuthFilter extends ZuulFilter {
 	@Override
 	public Object run() throws ZuulException {
 		// TODO Auto-generated method stub
-		int r = 10 / 0;
+		//模拟报错,测试自定义error filter功能
+		//int r = 10 / 0;
 //		RequestContext context = RequestContext.getCurrentContext();
 //		HttpServletRequest request = context.getRequest();
 //		HttpServletResponse response = context.getResponse();

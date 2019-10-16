@@ -100,5 +100,6 @@
 		<module>eureka-server-2nd</module>
 		<module>hystrix-server</module>
 		<module>ms-gateway</module>
+		<module>ms-config</module>
 	</modules>
 </project>

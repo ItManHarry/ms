@@ -12,6 +12,12 @@
   		<groupId>org.springframework.cloud</groupId>
   		<artifactId>spring-cloud-config-server</artifactId>
   	</dependency>
+  	<!-- 导入svn客户端 -->
+  	<dependency>
+	    <groupId>org.tmatesoft.svnkit</groupId>
+	    <artifactId>svnkit</artifactId>
+	    <version>1.8.10</version>
+	</dependency>
   </dependencies>
   <build>
   	<finalName>ms-config</finalName>

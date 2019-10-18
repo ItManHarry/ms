@@ -18,6 +18,11 @@
 	    <artifactId>svnkit</artifactId>
 	    <version>1.8.10</version>
 	</dependency>
+	<!-- 导入Eureka客户端 -->
+	<dependency>
+  		<groupId>org.springframework.cloud</groupId>
+  		<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+  	</dependency>
   </dependencies>
   <build>
   	<finalName>ms-config</finalName>

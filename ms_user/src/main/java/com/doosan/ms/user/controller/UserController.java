@@ -1,6 +1,7 @@
 package com.doosan.ms.user.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,16 @@ import com.doosan.ms.user.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Value("${system.image.path}")
+	private String imagePath;
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 
 	@GetMapping("/all")
 	public List<User> findAll(){
@@ -24,6 +35,7 @@ public class UserController {
 	
 	@GetMapping("/find/{id}")
 	public User getUserById(@PathVariable Integer id) {
+		System.out.println("Image Path : " + imagePath);
 		return userService.findById(id);
 	}
 	
